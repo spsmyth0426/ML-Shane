@@ -1,0 +1,26 @@
+{
+  "name": "ML",
+  "version": "0.3.0",
+  "description": "ML",
+  "engines": {
+    "node": "8.9.1"
+  },
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "blocksdk": "^1.0.1",
+    "body-parser": "^1.18.3",
+    "ejs": "^2.6.1",
+    "epress": "0.0.1-security",
+    "express": "^4.16.3",
+    "fuel-rest": "^3.0.3",
+    "http": "0.0.0",
+    "https": "^1.0.0",
+    "path": "^0.12.7",
+    "request": "^2.87.0",
+    "@tensorflow/tfjs": "^0.11.6",
+    "@tensorflow/tfjs-node": "^0.1.7"
+  }
+}
