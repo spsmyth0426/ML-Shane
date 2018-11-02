@@ -16,7 +16,7 @@ const testingData = tf.tensor2d(irisTesting.map(item => [
     item.sepal_length, itme.sepal_width, item.pedal_length, item.pedal_width
 ]))
 
-// build neural network
+// build neural network 
 const model = tf.sequential()
 
 model.add(tf.layers.dense({
