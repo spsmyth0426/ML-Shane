@@ -1,0 +1,57 @@
+var emailTesting = [
+    {
+      "Day": 0,
+      "Week": 1,
+      "Month": 1,
+      "AllTime": 3,
+      "Day_Opens": 0,
+      "Week_Opens": 0,
+      "Month_Opens": 0,
+      "AllTime_Opens": 0,
+      "LastSendOpened": 0
+    },
+    {
+      "Day": 0,
+      "Week": 0,
+      "Month": 1,
+      "AllTime": 3,
+      "Day_Opens": 0,
+      "Week_Opens": 0,
+      "Month_Opens": 0,
+      "AllTime_Opens": 0,
+      "LastSendOpened": 0
+    },
+    {
+      "Day": 0,
+      "Week": 1,
+      "Month": 2,
+      "AllTime": 5,
+      "Day_Opens": 0,
+      "Week_Opens": 0,
+      "Month_Opens": 0,
+      "AllTime_Opens": 0,
+      "LastSendOpened": 0
+    },
+    {
+      "Day": 0,
+      "Week": 0,
+      "Month": 1,
+      "AllTime": 2,
+      "Day_Opens": 0,
+      "Week_Opens": 1,
+      "Month_Opens": 1,
+      "AllTime_Opens": 0,
+      "LastSendOpened": 0
+    },
+    {
+      "Day": 1,
+      "Week": 12,
+      "Month": 13,
+      "AllTime": 32,
+      "Day_Opens": 3,
+      "Week_Opens": 7,
+      "Month_Opens": 25,
+      "AllTime_Opens": 0,
+      "LastSendOpened": 1
+    }
+]

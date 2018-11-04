@@ -1,0 +1,62 @@
+<html>
+  <head>
+    <!-- Load TensorFlow.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.13.3/dist/tf.min.js"> </script>
+    <script type="text/javascript" src="email.json"></script>
+    <script type="text/javascript" src="email-testing.json"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Place your code in the script tag below. You can also use an external .js file -->
+    <script> 
+        console.log(email);
+        console.log(emailTesting);
+        // Notice there is no 'import' statement. 'tf' is available on the index-page
+        // because of the script tag above.
+
+        // Define a model for linear regression.
+        //convert / set our data
+        const trainingData = tf.tensor2d(email.map(item => [
+            item.Day, item.Week, item.Month, item.AllTime, item.Day_Opens, item.Week_Opens, item.Month_Opens, item.AllTime_Opens
+        ]))
+        const outputData = tf.tensor2d(email.map(item => [
+            item.LastSendOpened === 1 ? 1 : 0,
+            item.LastSendOpened === 0 ? 1 : 0
+        ]))
+        const testingData = tf.tensor2d(emailTesting.map(item => [
+            item.Day, item.Week, item.Month, item.AllTime, item.Day_Opens, item.Week_Opens, item.Month_Opens, item.AllTime_Opens
+        ]))
+
+        console.log(testingData)
+
+        // build neural network
+        //const model = tf.sequential()
+
+        
+        const model = tf.loadModel('file:///model/model.json');
+        
+
+        // Register click event handler for predict button
+        document.getElementById('predictButton').addEventListener('click', (el, ev) => {
+            let val = document.getElementById('inputValue').value;
+            document.getElementById('output').innerText = model.predict(tf.tensor2d([val], [1,1]));
+        });
+
+    </script>
+  </head>
+
+<body>
+    <div class="container" style="padding-top: 20px">
+        <div class="card">
+            <div class="card-header">
+                <strong>TensorFlow.js Demo - Linear Regression</strong>
+            </div>
+            <div class="card-body">
+                <label>Input Value:</label> <input type="text" id="inputValue" class="form-control"><br>
+                <button type="button" class="btn btn-primary" id="predictButton" disabled>Model is being trained, please wait ...</button><br><br>
+                <h4>Result: </span></h4>
+                <h5><span class="badge badge-secondary" id="output"></span></h5>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,4 +1,4 @@
-[
+var irisTesting = [
   {
     "sepal_length": 5.4,
     "sepal_width": 3.9,

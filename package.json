@@ -10,6 +10,8 @@
     "start": "node index.js"
   },
   "dependencies": {
+    "@tensorflow/tfjs": "^0.11.7",
+    "@tensorflow/tfjs-node": "^0.1.7",
     "blocksdk": "^1.0.1",
     "body-parser": "^1.18.3",
     "ejs": "^2.6.1",
@@ -19,8 +21,6 @@
     "http": "0.0.0",
     "https": "^1.0.0",
     "path": "^0.12.7",
-    "request": "^2.87.0",
-    "@tensorflow/tfjs": "^0.11.6",
-    "@tensorflow/tfjs-node": "^0.1.7"
+    "request": "^2.87.0"
   }
 }
