@@ -33,7 +33,7 @@
         //const model = tf.sequential()
 
         
-        const model = tf.loadModel('https://ml-shane.herokuapp.com/model.json');
+        const model = await tf.loadModel('https://ml-shane.herokuapp.com/model.json');
         
 
         // Register click event handler for predict button
