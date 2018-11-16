@@ -39,7 +39,7 @@
         // Register click event handler for predict button
         $( "#predictButton" ).click(function() {
             let val = document.getElementById('inputValue').value;
-            document.getElementById('output').innerText = model.predict(tf.tensor2d([val], [1,1]));
+            document.getElementById('output').innerText = model.predict(tf.tensor2d([val]));
         });
     </script>
   </head>
