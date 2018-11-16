@@ -35,14 +35,42 @@
         //async loadModel() {
         //}
     $(document).ready(function () {
-        model = tf.loadModel('https://ml-shane.herokuapp.com/model.json');
+        const model = await tf.loadModel('https://ml-shane.herokuapp.com/model.json');
+
+        async function predictOnManualInput(model) {
+            if (model == null) {
+                console.log('ERROR: Please load or train model first.');
+                return;
+            }
+
+            // Use a `tf.tidy` scope to make sure that WebGL memory allocated for the
+            // `predict` call is released at the end.
+            tf.tidy(() => {
+                // Prepare input data as a 2D `tf.Tensor`.
+                const input = tf.tensor2d([0,0,6,9,0,0,0,0], [1, 8]);
+
+                // Call `model.predict` to get the prediction output as probabilities for
+                // the Iris flower categories.
+
+                const predictOut = model.predict(input);
+                const logits = Array.from(predictOut.dataSync());
+                //const winner = data.IRIS_CLASSES[predictOut.argMax(-1).dataSync()[0]];
+                //ui.setManualInputWinnerMessage(winner);
+                document.getElementById('output').innerText = logits;
+            });
+        }
+
+        async function predict() {
+            
+        }
         // Register click event handler for predict button
         $( "#predictButton" ).click(function() {
             console.log('click');
+            predictOnManualInput();
             //let val = document.getElementById('inputValue').value;
-            val = {"Day": 0,"Week": 0,"Month": 6,"AllTime": 9,"Day_Opens": 0,"Week_Opens": 0,"Month_Opens": 0,"AllTime_Opens": 0,"LastSendOpened": 0};
-            document.getElementById('output').innerText = model.predict(tf.tensor2d([0,0,6,9,0,0,0,0], [8,1]));
-            console.log(model.predict(tf.tensor2d([0,0,6,9,0,0,0,0], [8,1])));
+            //val = {"Day": 0,"Week": 0,"Month": 6,"AllTime": 9,"Day_Opens": 0,"Week_Opens": 0,"Month_Opens": 0,"AllTime_Opens": 0,"LastSendOpened": 0};
+            //document.getElementById('output').innerText = model.predict(tf.tensor2d([0,0,6,9,0,0,0,0], [8,1]));
+            //console.log(model.predict(tf.tensor2d([0,0,6,9,0,0,0,0], [8,1])));
         });
     });
     </script>
