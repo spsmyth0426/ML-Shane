@@ -35,7 +35,7 @@
         //async loadModel() {
             model = tf.loadModel('https://ml-shane.herokuapp.com/model.json');
         //}
-
+    $(document).ready(function () {
         // Register click event handler for predict button
         $( "#predictButton" ).click(function() {
             console.log('click');
@@ -48,6 +48,7 @@
             0,0,6,9,0,0,0,0,0
         ]), [9,1])));
         });
+    });
     </script>
   </head>
 
