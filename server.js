@@ -27,8 +27,6 @@ app.get('/', function(request, response, next) {
   });
 });
 
-app.post('/sportsEndPoint', sports.sportsEndPoint );
-
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Shanes Express server listening on port ' + app.get('port'));
 });
