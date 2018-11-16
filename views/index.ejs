@@ -32,9 +32,9 @@
         // build neural network
         //const model = tf.sequential()
 
-        async loadModel() {
-            const model = await tf.loadModel('https://ml-shane.herokuapp.com/model.json');
-        }
+        //async loadModel() {
+            model = await tf.loadModel('https://ml-shane.herokuapp.com/model.json');
+        //}
 
         // Register click event handler for predict button
         $( "#predictButton" ).click(function() {
