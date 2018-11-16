@@ -23,7 +23,7 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', function(request, response, next) {
-  response.render('index.html', {
+  response.render('index.ejs', {
   });
 });
 
