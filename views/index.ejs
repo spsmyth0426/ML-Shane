@@ -32,16 +32,20 @@
         // build neural network
         //const model = tf.sequential()
 
-        
-        const model = await tf.loadModel('https://ml-shane.herokuapp.com/model.json');
-        
+        async loadModel() {
+            const model = await tf.loadModel('https://ml-shane.herokuapp.com/model.json');
+        }
 
         // Register click event handler for predict button
         $( "#predictButton" ).click(function() {
             //let val = document.getElementById('inputValue').value;
             val = {"Day": 0,"Week": 0,"Month": 6,"AllTime": 9,"Day_Opens": 0,"Week_Opens": 0,"Month_Opens": 0,"AllTime_Opens": 0,"LastSendOpened": 0};
-            document.getElementById('output').innerText = model.predict(tf.tensor2d([0,0,6,9,0,0,0,0,0], [9,1]));
-            console.log(model.predict(tf.tensor2d([0,0,6,9,0,0,0,0,0], [9,1])));
+            document.getElementById('output').innerText = model.predict(tf.tensor2d(irisTesting.map(item => [
+            0,0,6,9,0,0,0,0,0
+        ]), [9,1]));
+            console.log(model.predict(tf.tensor2d(irisTesting.map(item => [
+            0,0,6,9,0,0,0,0,0
+        ]), [9,1])));
         });
     </script>
   </head>

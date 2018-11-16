@@ -1,0 +1,63 @@
+<html>
+  <head>
+    <!-- Load TensorFlow.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.13.3/dist/tf.min.js"> </script>
+    <script type="text/javascript" src="iris.json"></script>
+    <script type="text/javascript" src="iris-testing.json"></script>
+
+    <!-- Place your code in the script tag below. You can also use an external .js file -->
+    <script> 
+        console.log(iris);
+        console.log(irisTesting);
+        // Notice there is no 'import' statement. 'tf' is available on the index-page
+        // because of the script tag above.
+
+        // Define a model for linear regression.
+        //convert / set our data
+        const trainingData = tf.tensor2d(iris.map(item => [
+            item.sepal_length, item.sepal_width, item.petal_length, item.petal_width,
+        ]))
+        const outputData = tf.tensor2d(iris.map(item => [
+            item.species === "setosa" ? 1 : 0,
+            item.species === "virginica" ? 1 : 0,
+            item.species === "versicolor" ? 1 : 0,
+        ]))
+        const testingData = tf.tensor2d(irisTesting.map(item => [
+            item.sepal_length, item.sepal_width, item.petal_length, item.petal_width,
+        ]))
+
+        // build neural network
+        const model = tf.sequential()
+
+        model.add(tf.layers.dense({
+            inputShape: [4],
+            activation: "sigmoid",
+            units: 5,
+        }))
+        model.add(tf.layers.dense({
+            inputShape: [5],
+            activation: "sigmoid",
+            units: 3,
+        }))
+        model.add(tf.layers.dense({
+            activation: "sigmoid",
+            units: 3,
+        }))
+        model.compile({
+            loss: "meanSquaredError",
+            optimizer: tf.train.adam(.06),
+        })
+        // train/fit our network
+        const startTime = Date.now()
+        model.fit(trainingData, outputData, {epochs: 100})
+        .then((history) => {
+            // console.log(history)
+            model.predict(testingData).print()
+        })
+        // test network
+    </script>
+  </head>
+
+  <body>
+  </body>
+</html>
