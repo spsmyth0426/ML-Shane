@@ -33,9 +33,9 @@
         //const model = tf.sequential()
 
         //async loadModel() {
-            model = tf.loadModel('https://ml-shane.herokuapp.com/model.json');
         //}
     $(document).ready(function () {
+        model = tf.loadModel('https://ml-shane.herokuapp.com/model.json');
         // Register click event handler for predict button
         $( "#predictButton" ).click(function() {
             console.log('click');
