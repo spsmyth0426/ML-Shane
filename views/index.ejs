@@ -38,6 +38,7 @@
 
         // Register click event handler for predict button
         $( "#predictButton" ).click(function() {
+            console.log('click');
             //let val = document.getElementById('inputValue').value;
             val = {"Day": 0,"Week": 0,"Month": 6,"AllTime": 9,"Day_Opens": 0,"Week_Opens": 0,"Month_Opens": 0,"AllTime_Opens": 0,"LastSendOpened": 0};
             document.getElementById('output').innerText = model.predict(tf.tensor2d(irisTesting.map(item => [
