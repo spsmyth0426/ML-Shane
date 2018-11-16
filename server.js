@@ -8,7 +8,6 @@ var http        = require('http');
 var path        = require('path');
 var request     = require('request');
 var routes      = require('./routes');
-var sports    = require('./routes/sports');
 
 var app = express();
 
