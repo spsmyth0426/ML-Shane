@@ -35,9 +35,9 @@
         //async loadModel() {
         //}
     $(document).ready(function () {
-        const model = tf.loadModel('https://ml-shane.herokuapp.com/model.json');
 
-        async function predictOnManualInput(model) {
+        async function predictOnManualInput() {
+            const model = await tf.loadModel('https://ml-shane.herokuapp.com/model.json');
             if (model == null) {
                 console.log('ERROR: Please load or train model first.');
                 return;
