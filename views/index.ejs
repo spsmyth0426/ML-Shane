@@ -9,7 +9,6 @@
 
     <!-- Place your code in the script tag below. You can also use an external .js file -->
     <script> 
-        $('document').ready(function(){
         console.log(email);
         console.log(emailTesting);
         // Notice there is no 'import' statement. 'tf' is available on the index-page
@@ -42,7 +41,6 @@
             let val = document.getElementById('inputValue').value;
             document.getElementById('output').innerText = model.predict(tf.tensor2d([val], [1,1]));
         });
-    });
     </script>
   </head>
 
