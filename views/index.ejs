@@ -48,25 +48,20 @@
             // `predict` call is released at the end.
             tf.tidy(() => {
                 // Prepare input data as a 2D `tf.Tensor`.
-                $('#setVal').on('click', function () {
 
-                    const input = tf.tensor2d([0,0,6,9,0,0,0,0], [1, 8]);
+                const input = tf.tensor2d([0,0,6,9,0,0,0,0], [1, 8]);
 
-                    // Call `model.predict` to get the prediction output as probabilities for
-                    // the Iris flower categories.
+                // Call `model.predict` to get the prediction output as probabilities for
+                // the Iris flower categories.
 
-                    const predictOut = model.predict(input);
-                    const logits = Array.from(predictOut.dataSync());
-                    //const winner = data.IRIS_CLASSES[predictOut.argMax(-1).dataSync()[0]];
-                    //ui.setManualInputWinnerMessage(winner);
-                    document.getElementById('output').innerText = logits;
-                });
+                const predictOut = model.predict(input);
+                const logits = Array.from(predictOut.dataSync());
+                //const winner = data.IRIS_CLASSES[predictOut.argMax(-1).dataSync()[0]];
+                //ui.setManualInputWinnerMessage(winner);
+                document.getElementById('output').innerText = logits;
             });
         }
 
-        async function predict() {
-            
-        }
         // Register click event handler for predict button
         $( "#predictButton" ).click(function() {
             console.log('click');
