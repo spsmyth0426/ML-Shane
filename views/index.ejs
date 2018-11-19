@@ -37,6 +37,7 @@
     $(document).ready(function () {
 
         async function predictOnManualInput() {
+            console.log('Predict Function')
             const model = await tf.loadModel('https://ml-shane.herokuapp.com/model.json');
             if (model == null) {
                 console.log('ERROR: Please load or train model first.');
@@ -74,7 +75,7 @@
                 var value = $.trim(this.value)
                 return value ? value : undefined;
             }).get();
-            console.log(vals);
+            console.log(vals.join(','));
     
 
             predictOnManualInput();
