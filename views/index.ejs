@@ -50,7 +50,7 @@
                 // Prepare input data as a 2D `tf.Tensor`.
 
                 //const input = tf.tensor2d([0,0,6,9,0,0,0,0], [1, 8]);
-                const input = tf.tensor2d('['+[valForPredict]+']', [1, 8]);
+                const input = tf.tensor2d([valForPredict], [1, 8]);
 
                 // Call `model.predict` to get the prediction output as probabilities for
                 // the Iris flower categories.
@@ -72,7 +72,8 @@
                 return value ? value : undefined;
             }).get();
             console.log(vals.join(','));
-            valForPredict = vals.join(',');
+            stringForPredict = vals.join(',');
+            valForPredict = stringForPredict.split(',');
     
 
             predictOnManualInput(valForPredict);
