@@ -1,0 +1,115 @@
+<html>
+  <head>
+    <!-- Load TensorFlow.js -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.13.3/dist/tf.min.js"> </script>
+    <script type="text/javascript" src="https://ml-shane.herokuapp.com/email.json"></script>
+    <script type="text/javascript" src="https://ml-shane.herokuapp.com/email-testing.json"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <!-- Place your code in the script tag below. You can also use an external .js file -->
+    <script> 
+        console.log(email);
+        console.log(emailTesting);
+        // Notice there is no 'import' statement. 'tf' is available on the index-page
+        // because of the script tag above.
+
+        // Define a model for linear regression.
+        //convert / set our data
+        const trainingData = tf.tensor2d(email.map(item => [
+            item.Day, item.Week, item.Month, item.AllTime, item.Day_Opens, item.Week_Opens, item.Month_Opens, item.AllTime_Opens
+        ]))
+        const outputData = tf.tensor2d(email.map(item => [
+            item.LastSendOpened === 1 ? 1 : 0,
+            item.LastSendOpened === 0 ? 1 : 0
+        ]))
+        const testingData = tf.tensor2d(emailTesting.map(item => [
+            item.Day, item.Week, item.Month, item.AllTime, item.Day_Opens, item.Week_Opens, item.Month_Opens, item.AllTime_Opens
+        ]))
+
+        console.log(testingData)
+
+        // build neural network
+        //const model = tf.sequential()
+
+        //async loadModel() {
+        //}
+    $(document).ready(function () {
+
+        async function predictOnManualInput(valForPredict) {
+            console.log('Predict Function')
+            const model = await tf.loadModel('https://ml-shane.herokuapp.com/model.json');
+            if (model == null) {
+                console.log('ERROR: Please load or train model first.');
+                return;
+            }
+
+            // Use a `tf.tidy` scope to make sure that WebGL memory allocated for the
+            // `predict` call is released at the end.
+            tf.tidy(() => {
+                // Prepare input data as a 2D `tf.Tensor`.
+
+                //const input = tf.tensor2d([0,0,6,9,0,0,0,0], [1, 8]);
+                const input = tf.tensor2d([valForPredict], [1, 8]);
+
+                // Call `model.predict` to get the prediction output as probabilities for
+                // the Iris flower categories.
+
+                const predictOut = model.predict(input);
+                const logits = Array.from(predictOut.dataSync());
+                //const winner = data.IRIS_CLASSES[predictOut.argMax(-1).dataSync()[0]];
+                //ui.setManualInputWinnerMessage(winner);
+                document.getElementById('output').innerText = logits;
+            });
+        }
+
+        // Register click event handler for predict button
+        $( "#predictButton" ).click(function() {
+            console.log('click');
+            var form = $('.emailVal');
+            var vals = form.map(function () {
+                var value = $.trim(this.value)
+                return value ? value : undefined;
+            }).get();
+            console.log(vals.join(','));
+            stringForPredict = vals.join(',');
+            valForPredict = stringForPredict.split(',');
+    
+
+            predictOnManualInput(valForPredict);
+            //let val = document.getElementById('inputValue').value;
+            //val = {"Day": 0,"Week": 0,"Month": 6,"AllTime": 9,"Day_Opens": 0,"Week_Opens": 0,"Month_Opens": 0,"AllTime_Opens": 0,"LastSendOpened": 0};
+            //document.getElementById('output').innerText = model.predict(tf.tensor2d([0,0,6,9,0,0,0,0], [8,1]));
+            //console.log(model.predict(tf.tensor2d([0,0,6,9,0,0,0,0], [8,1])));
+        });
+    });
+    </script>
+  </head>
+
+<body>
+    <div class="container" style="padding-top: 20px">
+        <div>
+            <h4>Result: </span> <span class="badge badge-secondary" id="output"></span></h4>
+        </div>
+        <div class="row">
+            <div class="col-sm">
+                <label>Day:</label> <input type="number" id="day" class="form-control emailVal" value="0"><br>
+                <label>Week:</label> <input type="number" id="week" class="form-control emailVal" value="0"><br>
+                <label>Month:</label> <input type="number" id="month" class="form-control emailVal" value="6"><br>
+                <label>All Time:</label> <input type="number" id="allTime" class="form-control emailVal" value="9"><br>
+            </div>
+            <div class="col-sm">
+                <label>Day Opens:</label> <input type="number" id="dayOpen" class="form-control emailVal" value="0"><br>
+                <label>Week Opens:</label> <input type="number" id="weekOpen" class="form-control emailVal" value="0"><br>
+                <label>Month Opens:</label> <input type="number" id="monthOpen" class="form-control emailVal" value="0"><br>
+                <label>All Time Opens:</label> <input type="number" id="allTimeOpen" class="form-control emailVal" value="0"><br>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm">
+                <button type="button" class="btn btn-primary" id="predictButton" >Predict</button><br><br>
+            </div>    
+        </div>
+    </div>
+</body>
+</html>

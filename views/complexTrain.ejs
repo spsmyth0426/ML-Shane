@@ -1,0 +1,85 @@
+<html>
+  <head>
+    <!-- Load TensorFlow.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.13.3/dist/tf.min.js"> </script>
+    <script type="text/javascript" src="email.json"></script>
+    <script type="text/javascript" src="email-testing.json"></script>
+
+    <!-- Place your code in the script tag below. You can also use an external .js file -->
+    <script> 
+        console.log(email);
+        console.log(emailTesting);
+        // Notice there is no 'import' statement. 'tf' is available on the index-page
+        // because of the script tag above.
+
+        $.each(email, function (key, data) {
+            console.log(key)
+            $.each(data, function (index, data) {
+                console.log('index', data)
+            })
+        })
+
+/*
+        // Define a model for linear regression.
+        //convert / set our data
+        const trainingData = tf.tensor2d(email.map(item => [
+            item.Day, item.Week, item.Month, item.AllTime, item.Day_Opens, item.Week_Opens, item.Month_Opens, item.AllTime_Opens
+        ]))
+        const outputData = tf.tensor2d(email.map(item => [
+            item.LastSendOpened === 1 ? 1 : 0,
+            item.LastSendOpened === 0 ? 1 : 0
+        ]))
+        const testingData = tf.tensor2d(emailTesting.map(item => [
+            item.Day, item.Week, item.Month, item.AllTime, item.Day_Opens, item.Week_Opens, item.Month_Opens, item.AllTime_Opens
+        ]))
+
+        console.log(testingData)
+
+        // build neural network
+        const model = tf.sequential()
+
+        model.add(tf.layers.dense({
+            inputShape: [8],
+            activation: "sigmoid",
+            units: 9,
+        }))
+        model.add(tf.layers.dense({
+            inputShape: [9],
+            activation: "sigmoid",
+            units: 2,
+        }))
+        model.add(tf.layers.dense({
+            activation: "sigmoid",
+            units: 2,
+        }))
+        model.compile({
+            loss: "meanSquaredError",
+            optimizer: tf.train.adam(.06),
+        })
+        // train/fit our network
+        const startTime = Date.now()
+        model.fit(trainingData, outputData, {epochs: 50,
+        callbacks: {
+            onEpochEnd: async (epoch, log) => {
+            console.log(`Epoch ${epoch}: loss = ${log.loss}`);
+            }
+        }})
+        .then((history) => {
+            console.log(history)
+            model.predict(testingData).print()
+
+            const saveResult = model.save('downloads://my-model-1');
+            console.log(saveResult)
+        })
+
+    
+        //const saveResult = model.save('localstorage://my-model-1');
+        // test network
+
+*/    
+    </script>
+  </head>
+
+  <body>
+  </body>
+</html>
