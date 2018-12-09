@@ -13,11 +13,8 @@
         // Notice there is no 'import' statement. 'tf' is available on the index-page
         // because of the script tag above.
         $(document).ready(function () {
-            $.each(email, function (key, data) {
+            $.first(email, function (key, data) {
                 console.log(key)
-                $.each(data, function (index, data) {
-                    console.log('index', data)
-                })
             })
         });
 /*
