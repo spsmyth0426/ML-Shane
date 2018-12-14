@@ -3,7 +3,7 @@
     <!-- Load TensorFlow.js -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.13.3/dist/tf.min.js"> </script>
-    <script type="text/javascript" src="email.json"></script>
+    <script type="text/javascript" src="complexTrain.json"></script>
     <script type="text/javascript" src="email-testing.json"></script>
 
     <!-- Place your code in the script tag below. You can also use an external .js file -->
@@ -19,21 +19,18 @@
                 console.log(key);
                 keys.push(key);
             })
+            var count = keys.length;
             console.log(keys);
         });
-/*
+
         // Define a model for linear regression.
         //convert / set our data
-        const trainingData = tf.tensor2d(email.map(item => [
-            item.Day, item.Week, item.Month, item.AllTime, item.Day_Opens, item.Week_Opens, item.Month_Opens, item.AllTime_Opens
-        ]))
+        const trainingData = tf.tensor2d(email.map(item => keys))
         const outputData = tf.tensor2d(email.map(item => [
             item.LastSendOpened === 1 ? 1 : 0,
             item.LastSendOpened === 0 ? 1 : 0
         ]))
-        const testingData = tf.tensor2d(emailTesting.map(item => [
-            item.Day, item.Week, item.Month, item.AllTime, item.Day_Opens, item.Week_Opens, item.Month_Opens, item.AllTime_Opens
-        ]))
+        const testingData = tf.tensor2d(emailTesting.map(item => keys))
 
         console.log(testingData)
 
@@ -41,12 +38,12 @@
         const model = tf.sequential()
 
         model.add(tf.layers.dense({
-            inputShape: [8],
+            inputShape: [count-1],
             activation: "sigmoid",
-            units: 9,
+            units: count,
         }))
         model.add(tf.layers.dense({
-            inputShape: [9],
+            inputShape: [count],
             activation: "sigmoid",
             units: 2,
         }))
@@ -77,8 +74,7 @@
     
         //const saveResult = model.save('localstorage://my-model-1');
         // test network
-
-*/    
+    
     </script>
   </head>
 
