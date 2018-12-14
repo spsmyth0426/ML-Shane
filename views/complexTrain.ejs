@@ -21,7 +21,6 @@
             })
             var count = keys.length;
             console.log(keys);
-            console.log(count-1);
         //});
 
         // Define a model for linear regression.
@@ -46,11 +45,11 @@
         model.add(tf.layers.dense({
             inputShape: [count],
             activation: "sigmoid",
-            units: 2,
+            units: (count-2),
         }))
         model.add(tf.layers.dense({
             activation: "sigmoid",
-            units: 2,
+            units: (count-2),
         }))
         model.compile({
             loss: "meanSquaredError",
